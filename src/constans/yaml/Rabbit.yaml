@@ -1,0 +1,22 @@
+name: Rabbit
+icon: /uD83D/uDC07
+weight: 2
+maxQuantityPerCell: 150
+movementSpeed: 2
+foodRequiredForSatiation: 0.45
+eatingRiskMap:
+  Wolf: 0,
+  Boa: 0,
+  Fox: 0,
+  Bear: 0,
+  Eagle: 0,
+  Horse: 0,
+  Deer: 0,
+  Mouse: 0,
+  Goat: 0,
+  Sheep: 0,
+  Boar: 0,
+  Buffalo: 0,
+  Duck: 0,
+  Caterpillar: 0,
+  Grass: 100

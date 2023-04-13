@@ -1,0 +1,22 @@
+name: Boar
+icon: \uD83D\uDC17
+weight: 400
+maxQuantityPerCell: 50
+movementSpeed: 2
+foodRequiredForSatiation: 50
+eatingRiskMap:
+  Wolf: 0,
+  Boa: 0,
+  Fox: 0,
+  Bear: 0,
+  Eagle: 0,
+  Horse: 0,
+  Deer: 0,
+  Rabbit: 0,
+  Mouse: 50,
+  Goat: 0,
+  Sheep: 0,
+  Buffalo: 0,
+  Duck: 0,
+  Caterpillar: 90,
+  Grass: 100
