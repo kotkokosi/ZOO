@@ -4,11 +4,13 @@ import interfaces.Resident;
 import objects.inhabitans.animals.Animal;
 import objects.island.Coordinate;
 
+import java.util.Map;
+
 public class Duck extends Omnivore implements Resident {
 
 
-    public Duck(String name, String icon, double weight, int radiusMove, double amountForSatiety, int maxQuantityPerCell) {
-        super(name, icon, weight, radiusMove, amountForSatiety, maxQuantityPerCell);
+    public Duck(String name, String icon, double weight, int maxQuantityPerCell, int movementSpeed, double foodRequiredForSatiation, Map<String, Integer> eatingRiskMap) {
+        super(name, icon, weight, maxQuantityPerCell, movementSpeed, foodRequiredForSatiation, eatingRiskMap);
     }
 
     @Override

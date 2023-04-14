@@ -4,10 +4,13 @@ import interfaces.Resident;
 import objects.inhabitans.animals.Animal;
 import objects.island.Coordinate;
 
+import java.util.Map;
+
 public class Caterpillar extends Herbivore implements Resident {
 
-    public Caterpillar(String name, String icon, double weight, int movementSpeed, double foodRequiredForSatiation, int maxQuantityPerCell) {
-        super(name, icon, weight, movementSpeed, foodRequiredForSatiation, maxQuantityPerCell);
+
+    public Caterpillar(String name, String icon, double weight, int maxQuantityPerCell, int movementSpeed, double foodRequiredForSatiation, Map<String, Integer> eatingRiskMap) {
+        super(name, icon, weight, maxQuantityPerCell, movementSpeed, foodRequiredForSatiation, eatingRiskMap);
     }
 
     @Override
