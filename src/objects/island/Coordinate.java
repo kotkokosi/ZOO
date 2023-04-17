@@ -1,25 +1,28 @@
 package objects.island;
 
-public final class Coordinate {
-    private final int ID;
-    private final int coordinateX;
-    private final int coordinateY;
+public class Coordinate {
+    private int coordinateX;
 
-    public Coordinate(int coordinateY, int coordinateX) {
-        this.coordinateX = coordinateX;
-        this.coordinateY = coordinateY;
-        this.ID = coordinateX * coordinateY;
-    }
+    private int coordinateY;
 
     public int getCoordinateX() {
         return coordinateX;
+    }
+
+    public void setCoordinateX(int coordinateX) {
+        this.coordinateX = coordinateX;
     }
 
     public int getCoordinateY() {
         return coordinateY;
     }
 
-    public int getID() {
-        return ID;
+    public void setCoordinateY(int coordinateY) {
+        this.coordinateY = coordinateY;
+    }
+
+    public Coordinate(int coordinateX, int coordinateY) {
+        this.coordinateX = coordinateX;
+        this.coordinateY = coordinateY;
     }
 }

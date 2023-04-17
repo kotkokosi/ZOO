@@ -1,5 +1,6 @@
 package objects.inhabitans.animals.predators;
 
+
 import objects.inhabitans.animals.Animal;
 
 import java.util.Map;

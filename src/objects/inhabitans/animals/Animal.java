@@ -1,56 +1,42 @@
 package objects.inhabitans.animals;
 
+import lombok.Getter;
+import lombok.Setter;
 import objects.inhabitans.Entity;
 import objects.island.Coordinate;
+import objects.island.Island;
+import objects.island.Сell;
 
 import java.util.Map;
+import java.util.Random;
 
+@Getter
+@Setter
 public abstract class Animal extends Entity {
+
     private double weight;
     private int maxQuantityPerCell;
     private int movementSpeed;
     private double foodRequiredForSatiation;
-    Map<String, Integer> eatingRiskMap;
+    private Map<String, Integer> eatingRiskMap;
 
-    public Map<String, Integer> getEatingRiskMap() {
-        return eatingRiskMap;
-    }
 
     public double getWeight() {
         return weight;
-    }
-
-    public int getMovementSpeed() {
-        return movementSpeed;
-    }
-
-    public double getFoodRequiredForSatiation() {
-        return foodRequiredForSatiation;
-    }
-
-
-    public void setWeight(double weight) {
-        this.weight = weight;
     }
 
     public int getMaxQuantityPerCell() {
         return maxQuantityPerCell;
     }
 
-    public void setMovementSpeed(int movementSpeed) {
-        this.movementSpeed = movementSpeed;
+    public int getMovementSpeed() {
+        return movementSpeed;
     }
-
-    public void setFoodRequiredForSatiation(double foodRequiredForSatiation) {
-        this.foodRequiredForSatiation = foodRequiredForSatiation;
+    public double getFoodRequiredForSatiation() {
+        return foodRequiredForSatiation;
     }
-
-    public void setMaxQuantityPerCell(int maxQuantityPerCell) {
-        this.maxQuantityPerCell = maxQuantityPerCell;
-    }
-
-    public void setEatingRiskMap(Map<String, Integer> eatingRiskMap) {
-        this.eatingRiskMap = eatingRiskMap;
+    public Map<String, Integer> getEatingRiskMap() {
+        return eatingRiskMap;
     }
 
     public Animal(String name, String icon, double weight,
@@ -65,7 +51,11 @@ public abstract class Animal extends Entity {
 
     public abstract void eat(Animal food);
 
-    public abstract void multiply();
+    public Coordinate multiply(){
+        int supposedMoveX = new Random().nextInt(this.movementSpeed + 1);
+        int supposedMoveY = new Random().nextInt(this.movementSpeed + 1);
+        return new Coordinate(supposedMoveX, supposedMoveY);
+    }
 
-    public abstract void selectDirection(Coordinate coordinate);
+    public abstract void selectDirection(Сell сell);
 }

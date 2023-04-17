@@ -1,0 +1,22 @@
+{
+  "name": "Covid",
+  "icon": "\uD83E\uDDA0",
+  "eatingRiskMap": {
+    "Wolf": 100,
+    "Boa": 100,
+    "Fox": 100,
+    "Bear": 100,
+    "Eagle": 100,
+    "Horse": 10,
+    "Deer": 0,
+    "Rabbit": 0,
+    "Mouse": 10,
+    "Goat": 0,
+    "Sheep": 0,
+    "Boar": 20,
+    "Buffalo": 0,
+    "Duck": 10,
+    "Caterpillar": 0,
+    "Grass": 0
+  }
+}

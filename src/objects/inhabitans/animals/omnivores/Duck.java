@@ -1,15 +1,23 @@
 package objects.inhabitans.animals.omnivores;
 
+
+import com.fasterxml.jackson.annotation.*;
 import interfaces.Resident;
 import objects.inhabitans.animals.Animal;
-import objects.island.Coordinate;
+import objects.island.Сell;
 
 import java.util.Map;
 
 public class Duck extends Omnivore implements Resident {
-
-
-    public Duck(String name, String icon, double weight, int maxQuantityPerCell, int movementSpeed, double foodRequiredForSatiation, Map<String, Integer> eatingRiskMap) {
+    @JsonCreator
+    public Duck(
+            @JsonProperty("name") String name,
+            @JsonProperty("icon") String icon,
+            @JsonProperty("weight") double weight,
+            @JsonProperty("maxQuantityPerCell") int maxQuantityPerCell,
+            @JsonProperty("movementSpeed") int movementSpeed,
+            @JsonProperty("foodRequiredForSatiation") double foodRequiredForSatiation,
+            @JsonProperty("eatingRiskMap") Map<String, Integer> eatingRiskMap) {
         super(name, icon, weight, maxQuantityPerCell, movementSpeed, foodRequiredForSatiation, eatingRiskMap);
     }
 
@@ -19,12 +27,7 @@ public class Duck extends Omnivore implements Resident {
     }
 
     @Override
-    public void multiply() {
-
-    }
-
-    @Override
-    public void selectDirection(Coordinate coordinate) {
+    public void selectDirection(Сell сell) {
 
     }
 }

@@ -1,0 +1,25 @@
+{
+  "name": "Bear",
+  "icon": "\uD83D\uDC3B",
+  "weight": 500.0,
+  "maxQuantityPerCell": 5,
+  "movementSpeed": 2,
+  "foodRequiredForSatiation": 80.0,
+  "eatingRiskMap": {
+    "Wolf": 0,
+    "Boa": 80,
+    "Fox": 0,
+    "Eagle": 0,
+    "Horse": 40,
+    "Deer": 80,
+    "Rabbit": 80,
+    "Mouse": 90,
+    "Goat": 70,
+    "Sheep": 70,
+    "Boar": 50,
+    "Buffalo": 20,
+    "Duck": 10,
+    "Caterpillar": 0,
+    "Grass": 0
+  }
+}

@@ -2,34 +2,48 @@ package objects.island;
 
 import generator.GeneratorEntity;
 import interfaces.Resident;
+import lombok.Setter;
+import objects.inhabitans.animals.Animal;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
-public record Island(int islandHeight, int islandWeight) {
-    private static final HashMap<Coordinate, ArrayList<Resident>> island = new HashMap<>();
+@Setter
+public class Island {
+    private final int islandHeight;
+    private final int islandWeight;
 
-    public HashMap<Coordinate, ArrayList<Resident>> getIsland() {
-        return island;
+    private Сell[][] сells;
+
+    public Сell getConcreteCell(int first, int second){
+        return сells[first][second];
     }
+
+    public Сell[] getArrayСells(int first) {
+        return сells[first];
+    }
+
+    public Сell[][] getСells() {
+        return сells;
+    }
+
+    public Island(int islandHeight, int islandWeight) {
+        this.islandHeight = islandHeight;
+        this.islandWeight = islandWeight;
+        сells = new Сell[islandWeight][islandHeight];
+    }
+
+
     public void islandFill() {
-        for (int i = 1; i <= islandHeight; i++) {
-            for (int j = 1; j <= islandWeight; j++) {
-                island.put(new Coordinate(i, j), (ArrayList<Resident>) new GeneratorEntity().generateListEntity());
+        for (int i = 0; i < islandHeight; i++) {
+            for (int j = 0; j < islandWeight; j++) {
+                сells[i][j] = new Сell(i, j, (ArrayList<Resident>) new GeneratorEntity().generateListEntity());
             }
         }
     }
 
-//    private List<Resident> generateListEntity() {
-//        return Stream.generate(this::generateEntity)
-//                .limit(new Random().nextInt(1, 5))
-//                .collect(Collectors.toCollection(ArrayList::new));
-//    }
-//
-//    private Resident generateEntity() {
-//        Resident[] entities = {new Boar(), new Buffalo(), new Caterpillar(), new Deer(), new Duck(),
-//                new Goat(), new Horse(), new Mouse(), new Rabbit(), new Sheep(),
-//                new Grass(), new Bear(), new Boa(), new Eagle(), new Fox(), new Wolf()};
-//        return entities[new Random().nextInt(entities.length)];
-//    }
+    public void deliveryAnimal(Animal animal, int moveX, int moveY){
+        ArrayList<Resident> list = (ArrayList<Resident>) сells[moveX][moveY].getResidentList();
+        list.add((Resident) animal);
+        сells[moveX][moveY].setResidentList(list);
+    }
 }
