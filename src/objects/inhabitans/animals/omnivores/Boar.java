@@ -2,12 +2,16 @@ package objects.inhabitans.animals.omnivores;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import interfaces.Resident;
+import interfaces.generalEntity.Resident;
+import lombok.Getter;
+import lombok.Setter;
 import objects.inhabitans.animals.Animal;
 import objects.island.Сell;
 
 import java.util.Map;
 
+@Getter
+@Setter
 public class Boar extends Omnivore implements Resident {
 
     @JsonCreator
@@ -17,8 +21,9 @@ public class Boar extends Omnivore implements Resident {
                 @JsonProperty("maxQuantityPerCell") int maxQuantityPerCell,
                 @JsonProperty("movementSpeed") int movementSpeed,
                 @JsonProperty("foodRequiredForSatiation") double foodRequiredForSatiation,
+                @JsonProperty("energy") double energy,
                 @JsonProperty("eatingRiskMap") Map<String, Integer> eatingRiskMap) {
-        super(name, icon, weight, maxQuantityPerCell, movementSpeed, foodRequiredForSatiation, eatingRiskMap);
+        super(name, icon, weight, maxQuantityPerCell, movementSpeed, foodRequiredForSatiation, energy, eatingRiskMap);
     }
 
     @Override
@@ -27,7 +32,7 @@ public class Boar extends Omnivore implements Resident {
     }
 
     @Override
-    public void selectDirection(Сell сell) {
+    public void multiply(Сell сell) {
 
     }
 }

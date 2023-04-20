@@ -5,6 +5,7 @@
   "maxQuantityPerCell": 30,
   "movementSpeed": 3,
   "foodRequiredForSatiation": 8.0,
+  "energy": 4.0,
   "eatingRiskMap": {
     "Boa": 0,
     "Fox": 0,

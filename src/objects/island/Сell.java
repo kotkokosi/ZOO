@@ -1,49 +1,40 @@
 package objects.island;
 
-import interfaces.Resident;
-import lombok.Getter;
+import generator.CheckMaxQuantityPerCell;
+import interfaces.generalEntity.Resident;
 import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
+@Setter
 public class Сell {
+
+    private Coordinate coordinate;
+    private  CheckMaxQuantityPerCell checkMaxQuantityPerCell = new CheckMaxQuantityPerCell();
+    private List<Resident> residentList;
 
     public Coordinate getCoordinate() {
         return coordinate;
     }
-
-    public void setCoordinate(Coordinate coordinate) {
-        this.coordinate = coordinate;
-    }
-
-    public void setResidentList(List<Resident> residentList) {
-        this.residentList = residentList;
-    }
-
-    private Coordinate coordinate;
-
-    private List<Resident> residentList;
-
-    public ArrayList<Resident> getResidentAndRemove() {
-        ArrayList<Resident> residents = new ArrayList<>();
-        for (int i = 0; i < residentList.size(); i++) {
-            residents.add(residentList.remove(i));
-        }
-        return residents;
-    }
-
     public List<Resident> getResidentList() {
         return residentList;
     }
-
-    public void setResidentList(ArrayList<Resident> residentList) {
-        this.residentList = residentList;
+    public CheckMaxQuantityPerCell getCheckMaxQuantityPerCell() {
+        return checkMaxQuantityPerCell;
     }
 
     public Сell(int coordinateX, int coordinateY, ArrayList<Resident> residentList) {
         coordinate = new Coordinate(coordinateX, coordinateY);
         this.residentList = residentList;
+    }
+
+    public void addResidentToList(Resident resident){
+        residentList.add(resident);
+    }
+
+    public Resident removeResidentToList(){
+            return residentList.remove(0);
     }
 }

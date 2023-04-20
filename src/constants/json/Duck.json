@@ -5,6 +5,7 @@
   "maxQuantityPerCell": 200,
   "movementSpeed": 4,
   "foodRequiredForSatiation": 0.15,
+  "energy": 0.075,
   "eatingRiskMap": {
     "Wolf": 0,
     "Boa": 0,

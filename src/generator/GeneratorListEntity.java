@@ -1,9 +1,8 @@
 package generator;
 
-import com.fasterxml.jackson.core.JsonFactory;
-import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import interfaces.Resident;
+import exceptions.MaxQuantityPerCell;
+import interfaces.generalEntity.Resident;
 import objects.inhabitans.animals.herbivores.*;
 import objects.inhabitans.animals.omnivores.Boar;
 import objects.inhabitans.animals.omnivores.Duck;
@@ -12,24 +11,33 @@ import objects.inhabitans.animals.predators.*;
 import objects.inhabitans.plants.Grass;
 import objects.inhabitans.virus.Covid;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static constants.path.JsonPath.*;
 
-public class GeneratorEntity {
-
+public class GeneratorListEntity {
     public List<Resident> generateListEntity() {
-        return Stream.generate(this::generateEntity)
-                .limit(new Random().nextInt(1, 2))
-                .collect(Collectors.toCollection(ArrayList::new));
+        List<Resident> residents = new ArrayList<>();
+        CheckMaxQuantityPerCell check = new CheckMaxQuantityPerCell();
+        for (int i = 0; i < new Random().nextInt(1, 2); i++) {// bound do limit Entity on Cell
+            boolean turn = true;
+            while (turn) {
+                Resident resident = new GeneratorListEntity().generateEntity();
+                if (!(check.checkPlusQuantityPerCell(resident))) {
+                    residents.add(resident);
+                    turn = false;
+                } else {
+                    throw new MaxQuantityPerCell("Max quantity per cell!!!");
+                }
+            }
+        }
+        check.cleanFields();
+        return residents;
     }
+
 
     private Resident generateEntity() {
         ArrayList<Resident> entities = new ArrayList<>();

@@ -1,5 +1,8 @@
 package objects.island;
 
+import lombok.Setter;
+
+@Setter
 public class Coordinate {
     private int coordinateX;
 
@@ -9,16 +12,8 @@ public class Coordinate {
         return coordinateX;
     }
 
-    public void setCoordinateX(int coordinateX) {
-        this.coordinateX = coordinateX;
-    }
-
     public int getCoordinateY() {
         return coordinateY;
-    }
-
-    public void setCoordinateY(int coordinateY) {
-        this.coordinateY = coordinateY;
     }
 
     public Coordinate(int coordinateX, int coordinateY) {

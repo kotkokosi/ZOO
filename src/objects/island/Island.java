@@ -1,9 +1,8 @@
 package objects.island;
 
-import generator.GeneratorEntity;
-import interfaces.Resident;
+import generator.GeneratorListEntity;
+import interfaces.generalEntity.Resident;
 import lombok.Setter;
-import objects.inhabitans.animals.Animal;
 
 import java.util.ArrayList;
 
@@ -11,7 +10,6 @@ import java.util.ArrayList;
 public class Island {
     private final int islandHeight;
     private final int islandWeight;
-
     private Сell[][] сells;
 
     public Сell getConcreteCell(int first, int second){
@@ -36,14 +34,12 @@ public class Island {
     public void islandFill() {
         for (int i = 0; i < islandHeight; i++) {
             for (int j = 0; j < islandWeight; j++) {
-                сells[i][j] = new Сell(i, j, (ArrayList<Resident>) new GeneratorEntity().generateListEntity());
+                сells[i][j] = new Сell(i, j, (ArrayList<Resident>) new GeneratorListEntity().generateListEntity());
             }
         }
     }
 
-    public void deliveryAnimal(Animal animal, int moveX, int moveY){
-        ArrayList<Resident> list = (ArrayList<Resident>) сells[moveX][moveY].getResidentList();
-        list.add((Resident) animal);
-        сells[moveX][moveY].setResidentList(list);
+    public void deliveryAnimal(Resident animal, int moveX, int moveY){
+        сells[moveX][moveY].addResidentToList(animal);
     }
 }

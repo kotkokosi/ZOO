@@ -2,8 +2,7 @@ package objects.inhabitans.virus;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import interfaces.Resident;
-
+import interfaces.generalEntity.Resident;
 import java.util.Map;
 
 public class Covid extends Virus implements Resident {

@@ -1,10 +1,12 @@
 package objects.inhabitans.virus;
 
+import lombok.Setter;
 import objects.inhabitans.Entity;
 import java.util.Map;
 
+@Setter
 public abstract class Virus extends Entity {
-    protected Map<String, Integer> eatingRiskMap;
+    private Map<String, Integer> eatingRiskMap;
 
     public Map<String, Integer> getEatingRiskMap() {
         return eatingRiskMap;
