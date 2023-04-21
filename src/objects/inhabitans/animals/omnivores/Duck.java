@@ -1,12 +1,12 @@
 package objects.inhabitans.animals.omnivores;
 
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import interfaces.generalEntity.Resident;
 import lombok.Getter;
 import lombok.Setter;
-import objects.inhabitans.animals.Animal;
-import objects.island.Сell;
+
 import java.util.Map;
 
 @Getter
@@ -24,15 +24,5 @@ public class Duck extends Omnivore implements Resident {
             @JsonProperty("energy") double energy,
             @JsonProperty("eatingRiskMap") Map<String, Integer> eatingRiskMap) {
         super(name, icon, weight, maxQuantityPerCell, movementSpeed, foodRequiredForSatiation, energy, eatingRiskMap);
-    }
-
-    @Override
-    public void eat(Animal food) {
-
-    }
-
-    @Override
-    public void multiply(Сell сell) {
-
     }
 }

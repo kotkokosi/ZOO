@@ -8,6 +8,7 @@
   "energy": 1.50,
   "eatingRiskMap": {
     "Wolf": 0,
+    "Boa": 0,
     "Fox": 15,
     "Bear": 0,
     "Eagle": 0,

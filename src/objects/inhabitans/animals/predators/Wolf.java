@@ -5,8 +5,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import interfaces.generalEntity.Resident;
 import lombok.Getter;
 import lombok.Setter;
-import objects.inhabitans.animals.Animal;
-import objects.island.Сell;
 
 import java.util.Map;
 @Getter
@@ -24,15 +22,5 @@ public class Wolf extends Predator implements Resident {
             @JsonProperty("energy") double energy,
             @JsonProperty("eatingRiskMap") Map<String, Integer> eatingRiskMap) {
         super(name, icon, weight, maxQuantityPerCell, movementSpeed, foodRequiredForSatiation, energy, eatingRiskMap);
-    }
-
-    @Override
-    public void eat(Animal meal) {
-
-    }
-
-    @Override
-    public void multiply(Сell сell) {
-
     }
 }

@@ -13,16 +13,21 @@ public class Сell {
 
     private Coordinate coordinate;
     private  CheckMaxQuantityPerCell checkMaxQuantityPerCell = new CheckMaxQuantityPerCell();
+
     private List<Resident> residentList;
 
     public Coordinate getCoordinate() {
         return coordinate;
     }
+
     public List<Resident> getResidentList() {
         return residentList;
     }
     public CheckMaxQuantityPerCell getCheckMaxQuantityPerCell() {
         return checkMaxQuantityPerCell;
+    }
+    public void setResidentList(List<Resident> residentList) {
+        this.residentList = residentList;
     }
 
     public Сell(int coordinateX, int coordinateY, ArrayList<Resident> residentList) {

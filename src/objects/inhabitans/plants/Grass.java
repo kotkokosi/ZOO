@@ -32,6 +32,11 @@ public class Grass extends Plant implements Resident {
     }
 
     @Override
+    public double getEnergy() {
+        return 0;
+    }
+
+    @Override
     public Map<String, Integer> getEatingRiskMap() {
         return null;
     }

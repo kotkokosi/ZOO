@@ -18,9 +18,10 @@ public class Main {
         Island island = new Island(islandHeight, islandWeight);
         island.islandFill();
         printIsland(island);
+        System.out.println("@".repeat(100));
         Simulation simulation = new Simulation();
         simulation.moveAnimal(island);
-        simulation.moveAnimal(island);
+        simulation.eatAnimal(island);
         printIsland(island);
     }
 

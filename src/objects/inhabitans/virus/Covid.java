@@ -32,4 +32,9 @@ public class Covid extends Virus implements Resident {
     public double getFoodRequiredForSatiation() {
         return 0;
     }
+
+    @Override
+    public double getEnergy() {
+        return 0;
+    }
 }

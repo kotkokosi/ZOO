@@ -1,5 +1,6 @@
 package objects.inhabitans.animals;
 
+import interfaces.generalEntity.Resident;
 import lombok.Setter;
 import objects.inhabitans.Entity;
 import objects.island.Coordinate;
@@ -28,6 +29,7 @@ public abstract class Animal extends Entity {
     public int getMaxQuantityPerCell() {
         return maxQuantityPerCell;
     }
+
     public int getMovementSpeed() {
         return movementSpeed;
     }
@@ -39,6 +41,14 @@ public abstract class Animal extends Entity {
     }
     public Map<String, Integer> getEatingRiskMap() {
         return eatingRiskMap;
+    }
+    public void setEnergy(double energy) {
+        if(energy > foodRequiredForSatiation - this.energy){
+            this.energy = foodRequiredForSatiation;
+        }else {
+            this.energy += energy;
+        }
+
     }
 
     public Animal(String name, String icon, double weight,
@@ -52,9 +62,17 @@ public abstract class Animal extends Entity {
         this.eatingRiskMap = eatingRiskMap;
     }
 
-    public Coordinate selectDirection(){
-        int supposedMoveX = new Random().nextInt(this.movementSpeed + 1);
-        int supposedMoveY = new Random().nextInt(this.movementSpeed + 1);
+    public Coordinate selectDirection(Сell currentCell){
+        int supposedMoveX = (new Random().nextInt(this.movementSpeed + 1)) +
+                currentCell.getCoordinate().getCoordinateX();
+        int supposedMoveY = new Random().nextInt(this.movementSpeed + 1) +
+                currentCell.getCoordinate().getCoordinateY();
         return new Coordinate(supposedMoveX, supposedMoveY);
     }
+
+    public boolean isDeadly(Resident food){
+        int chanceOfDeath = this.getEatingRiskMap().get(food.getName());
+        return new Random().nextInt(1, 101) <= chanceOfDeath;
+    }
+
 }
