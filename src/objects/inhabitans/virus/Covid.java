@@ -9,17 +9,13 @@ public class Covid extends Virus implements Resident {
     @JsonCreator
     public Covid(@JsonProperty("name") String name,
                  @JsonProperty("icon") String icon,
+                 @JsonProperty("maxQuantityPerCell") int maxQuantityPerCell,
                  @JsonProperty("eatingRiskMap") Map<String, Integer> eatingRiskMap) {
-        super(name, icon, eatingRiskMap);
+        super(name, icon, maxQuantityPerCell, eatingRiskMap);
     }
 
     @Override
     public double getWeight() {
-        return 0;
-    }
-
-    @Override
-    public int getMaxQuantityPerCell() {
         return 0;
     }
 

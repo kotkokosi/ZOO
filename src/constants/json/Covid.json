@@ -1,6 +1,7 @@
 {
   "name": "Covid",
   "icon": "\uD83E\uDDA0",
+  "maxQuantityPerCell": 1,
   "eatingRiskMap": {
     "Wolf": 100,
     "Boa": 100,
@@ -17,6 +18,7 @@
     "Buffalo": 0,
     "Duck": 10,
     "Caterpillar": 0,
-    "Grass": 0
+    "Grass": 0,
+    "Covid": 0
   }
 }

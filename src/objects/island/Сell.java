@@ -13,7 +13,6 @@ public class Сell {
 
     private Coordinate coordinate;
     private  CheckMaxQuantityPerCell checkMaxQuantityPerCell = new CheckMaxQuantityPerCell();
-
     private List<Resident> residentList;
 
     public Coordinate getCoordinate() {
@@ -39,7 +38,11 @@ public class Сell {
         residentList.add(resident);
     }
 
-    public Resident removeResidentToList(){
-            return residentList.remove(0);
+    public void addResidentToListWithNumber(Resident resident, int animalNumber){
+        residentList.add(animalNumber, resident);
+    }
+
+    public Resident removeResidentToList(int animalNumber){
+            return residentList.remove(animalNumber);
     }
 }

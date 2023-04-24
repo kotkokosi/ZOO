@@ -19,22 +19,19 @@ import java.util.Random;
 import static constants.path.JsonPath.*;
 
 public class GeneratorListEntity {
-    public List<Resident> generateListEntity() {
+    public List<Resident> generateListEntity(CheckMaxQuantityPerCell check) {
         List<Resident> residents = new ArrayList<>();
-        CheckMaxQuantityPerCell check = new CheckMaxQuantityPerCell();
-        for (int i = 0; i < new Random().nextInt(1, 2); i++) {// bound do limit Entity on Cell
+        for (int i = 0; i < new Random().nextInt(1, 40); i++) {// bound do limit Entity on Cell
             boolean turn = true;
             while (turn) {
                 Resident resident = new GeneratorListEntity().generateEntity();
-                if (!(check.checkPlusQuantityPerCell(resident))) {
+                if (!(check.checkPlusQuantityPerCellGeneration(resident))) {
                     residents.add(resident);
                     turn = false;
-                } else {
-                    throw new MaxQuantityPerCell("Max quantity per cell!!!");
                 }
             }
         }
-        check.cleanFields();
+        //check.cleanFields();
         return residents;
     }
 

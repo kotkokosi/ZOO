@@ -17,31 +17,7 @@ public class Main {
         }
         Island island = new Island(islandHeight, islandWeight);
         island.islandFill();
-        printIsland(island);
-        System.out.println("@".repeat(100));
         Simulation simulation = new Simulation();
-        simulation.moveAnimal(island);
-        simulation.eatAnimal(island);
-        printIsland(island);
-    }
-
-    public static void printIsland(Island island) {
-        for (Сell[] cells : island.getСells()) {
-            for (Сell cell : cells) {
-                for (Resident resident : cell.getResidentList()) {
-                    System.out.println("Coordinate  X: " + cell.getCoordinate().getCoordinateX()
-                    + " Coordinate Y : " + cell.getCoordinate().getCoordinateY());
-                    System.out.print(resident.getName() + " ");
-                    System.out.print(resident.getIcon() + " ");
-                    System.out.print(resident.getWeight() + " ");
-                    System.out.print(resident.getMaxQuantityPerCell() + " ");
-                    System.out.print(resident.getFoodRequiredForSatiation() + " ");
-                    System.out.print(resident.getMovementSpeed() + " ");
-                    System.out.print(resident.getMovementSpeed() + " ");
-                    System.out.println(resident.getEatingRiskMap() + " ");
-                }
-                System.out.println("-".repeat(15));
-            }
-        }
+        simulation.mainSimulation(5, island);
     }
 }
