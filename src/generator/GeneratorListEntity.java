@@ -1,7 +1,6 @@
 package generator;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import exceptions.MaxQuantityPerCell;
 import interfaces.generalEntity.Resident;
 import objects.inhabitans.animals.herbivores.*;
 import objects.inhabitans.animals.omnivores.Boar;
@@ -20,8 +19,15 @@ import static constants.path.JsonPath.*;
 
 public class GeneratorListEntity {
     public List<Resident> generateListEntity(CheckMaxQuantityPerCell check) {
+        ObjectMapper objectMapper = new ObjectMapper();
         List<Resident> residents = new ArrayList<>();
-        for (int i = 0; i < new Random().nextInt(1, 40); i++) {// bound do limit Entity on Cell
+        try {
+            residents.add(objectMapper.readValue(pathGrass, Grass.class));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        int boundResident = new Random().nextInt(1, 40);
+        for (int i = 0; i < boundResident; i++) {// bound do limit Entity on Cell
             boolean turn = true;
             while (turn) {
                 Resident resident = new GeneratorListEntity().generateEntity();
@@ -31,7 +37,6 @@ public class GeneratorListEntity {
                 }
             }
         }
-        //check.cleanFields();
         return residents;
     }
 
@@ -50,20 +55,19 @@ public class GeneratorListEntity {
             entities.add(6, objectMapper.readValue(pathMouse, Mouse.class));
             entities.add(7, objectMapper.readValue(pathRabbit, Rabbit.class));
             entities.add(8, objectMapper.readValue(pathSheep, Sheep.class));
-            entities.add(9, objectMapper.readValue(pathGrass, Grass.class));
-            entities.add(10, objectMapper.readValue(pathBear, Bear.class));
-            entities.add(11, objectMapper.readValue(pathBoa, Boa.class));
-            entities.add(12, objectMapper.readValue(pathEagle, Eagle.class));
-            entities.add(13, objectMapper.readValue(pathFox, Fox.class));
-            entities.add(14, objectMapper.readValue(pathDeer, Deer.class));
-            entities.add(15, objectMapper.readValue(pathWolf, Wolf.class));
+            entities.add(9, objectMapper.readValue(pathBear, Bear.class));
+            entities.add(10, objectMapper.readValue(pathBoa, Boa.class));
+            entities.add(11, objectMapper.readValue(pathEagle, Eagle.class));
+            entities.add(12, objectMapper.readValue(pathFox, Fox.class));
+            entities.add(13, objectMapper.readValue(pathDeer, Deer.class));
+            entities.add(14, objectMapper.readValue(pathWolf, Wolf.class));
 
-            if (new Random().nextInt(100) < 11) {
-                entities.add(16, objectMapper.readValue(pathCovid, Covid.class));
+            if (RandomRangeInt.getNumber(0, 101) < 11) {
+                entities.add(15, objectMapper.readValue(pathCovid, Covid.class));
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return entities.get(new Random().nextInt(entities.size()));
+        return entities.get(RandomRangeInt.getNumber(0,entities.size()));
     }
 }

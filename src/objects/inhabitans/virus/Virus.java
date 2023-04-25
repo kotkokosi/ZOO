@@ -1,5 +1,6 @@
 package objects.inhabitans.virus;
 
+import generator.RandomRangeInt;
 import interfaces.generalEntity.Resident;
 import lombok.Setter;
 import objects.inhabitans.Entity;
@@ -29,6 +30,6 @@ public abstract class Virus extends Entity {
 
     public boolean isDeadly(Resident food){
         int chanceOfDeath = this.getEatingRiskMap().get(food.getName());
-        return new Random().nextInt(1, 101) <= chanceOfDeath;
+        return RandomRangeInt.getNumber(1, 101) <= chanceOfDeath;
     }
 }

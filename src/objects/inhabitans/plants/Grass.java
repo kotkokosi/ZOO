@@ -3,15 +3,13 @@ package objects.inhabitans.plants;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import interfaces.generalEntity.Resident;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.util.Map;
 
-@Getter
-@Setter
+
 public class Grass extends Plant implements Resident {
 
-    private static int growGrass = 0;
+    private int growGrass = 0;
 
     public Grass(@JsonProperty("name") String name,
                  @JsonProperty("icon") String icon,
@@ -19,6 +17,23 @@ public class Grass extends Plant implements Resident {
                  @JsonProperty("maxQuantityPerCell") int maxQuantityPerCell){
 
         super(name, icon, weight, maxQuantityPerCell);
+    }
+
+    public void setGrowGrass(int growGrass) {
+        this.growGrass = growGrass;
+    }
+
+    public void setPlusGrowGrass(int growGrass) {
+        if(growGrass == 4) {
+            setGrowGrass(getGrowGrass() + growGrass);
+            setWeight(1.0);
+        } else if (getGrowGrass() < 4) {
+            setGrowGrass(getGrowGrass() + growGrass);
+        }
+    }
+
+    public int getGrowGrass() {
+        return growGrass;
     }
 
     @Override

@@ -1,45 +1,52 @@
 package simulation;
 
 import interfaces.generalEntity.Resident;
+import lombok.Getter;
+import lombok.Setter;
 import objects.inhabitans.animals.Animal;
-import objects.inhabitans.plants.Plant;
+import objects.inhabitans.plants.Grass;
 import objects.inhabitans.virus.Covid;
-import objects.island.Сell;
 
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+@Getter
+@Setter
 public class EatSimulation {
-    public static void eatAnimal(Сell currentCell, int animalNumber) {
-                currentCell.setResidentList(animalsSorting(currentCell.getResidentList(), animalNumber));
-    }
 
-    public static List<Resident> animalsSorting(List<Resident> residentList, int animalNumber) {
-        Set<Integer> animalsToRemove = new HashSet<>();
-        for (int i = 0; i < residentList.size(); i++) {
-                if (residentList.get(animalNumber) instanceof Plant) {
-                    continue;
-                }
-                if (residentList.get(animalNumber) instanceof Animal animal) {
-                    if (animal.isDeadly(residentList.get(i))) {
-                        animal.setEnergy(residentList.get(i).getEnergy());
-                        animalsToRemove.add(i);
-                    }
-                } else {
-                    Covid covid = (Covid) residentList.get(animalNumber);
-                    if (covid.isDeadly(residentList.get(i))) {
-                        animalsToRemove.add(i);
-                    }
-                }
+    private Set<Integer> animalsToRemove = new HashSet<>();
+
+    public List<Resident> eatIterator(List<Resident> residentList) {
+        for (int j = 0; j < residentList.size(); j++) {
+            for (int i = 0; i < residentList.size(); i++) {
+                if (j == i){continue;}
+                    addToRemove(residentList.get(j), residentList.get(i), i);
             }
-
-        return animalsDeath(animalsToRemove, residentList);
+        }
+        return animalsDeath(residentList, animalsToRemove);
     }
 
 
-    public static List<Resident> animalsDeath(Set<Integer> animalsToRemove, List<Resident> residentList) {
+    private void addToRemove(Resident eater, Resident food, int i) {
+        if (eater instanceof Animal animal && animal.isDeadly(food)) {
+            animal.setEnergy(food.getWeight());
+            this.animalsToRemove.add(i);
+            if (food instanceof Grass grass && grass.getWeight() == 5) {
+                grass.setGrowGrass(0);
+            }
+        } else if (eater instanceof Covid covid) {
+            if (covid.isDeadly(food)) {
+                animalsToRemove.add(i);
+            }
+        }
+    }
+
+
+
+
+    private List<Resident> animalsDeath(List<Resident> residentList, Set<Integer> animalsToRemove) {
         Iterator<Resident> iterator = residentList.iterator();
         int currentIndex = 0;
         while (iterator.hasNext()) {

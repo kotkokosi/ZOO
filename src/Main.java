@@ -18,6 +18,6 @@ public class Main {
         Island island = new Island(islandHeight, islandWeight);
         island.islandFill();
         Simulation simulation = new Simulation();
-        simulation.mainSimulation(5, island);
+        simulation.mainSimulation(2, island);
     }
 }

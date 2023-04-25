@@ -1,8 +1,11 @@
 package objects.inhabitans.animals;
 
+import generator.RandomRangeInt;
 import interfaces.generalEntity.Resident;
 import lombok.Setter;
 import objects.inhabitans.Entity;
+import objects.inhabitans.animals.predators.Bear;
+import objects.inhabitans.animals.predators.Predator;
 import objects.island.Coordinate;
 import objects.island.Сell;
 
@@ -50,7 +53,9 @@ public abstract class Animal extends Entity {
         } else {
             this.energy += energy;
         }
-
+    }
+    public boolean checkFullEnergy() {
+        return energy > foodRequiredForSatiation;
     }
 
     public Animal(String name, String icon, double weight,
@@ -66,9 +71,13 @@ public abstract class Animal extends Entity {
 
 
     public boolean isPair(Animal animal) {
+        if(this instanceof Predator){
+            int love = RandomRangeInt.getNumber(0, 101);
+            return love < 5;
+        }
         if(this instanceof Animal){
-            int love = new Random().nextInt(20);
-            return love < 20;
+            int love = RandomRangeInt.getNumber(0, 101);
+            return love < 60;
         }
         return false;
     }
@@ -86,7 +95,7 @@ public abstract class Animal extends Entity {
 
     public boolean isDeadly(Resident food) {
         int chanceOfDeath = this.getEatingRiskMap().get(food.getName());
-        return new Random().nextInt(1, 101) <= chanceOfDeath;
+        return RandomRangeInt.getNumber(1,101) <= chanceOfDeath;
     }
 
     public boolean minusEnergyAndCheckDead() {
