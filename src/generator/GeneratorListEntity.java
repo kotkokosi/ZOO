@@ -21,12 +21,7 @@ public class GeneratorListEntity {
     public List<Resident> generateListEntity(CheckMaxQuantityPerCell check) {
         ObjectMapper objectMapper = new ObjectMapper();
         List<Resident> residents = new ArrayList<>();
-        try {
-            residents.add(objectMapper.readValue(pathGrass, Grass.class));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        int boundResident = new Random().nextInt(1, 40);
+        int boundResident = new Random().nextInt(1, 100);
         for (int i = 0; i < boundResident; i++) {// bound do limit Entity on Cell
             boolean turn = true;
             while (turn) {
@@ -36,6 +31,11 @@ public class GeneratorListEntity {
                     turn = false;
                 }
             }
+        }
+        try {
+            residents.add(objectMapper.readValue(pathGrass, Grass.class));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
         return residents;
     }

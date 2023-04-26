@@ -21,17 +21,27 @@ public class Simulation {
     private static int day = 1; // 1 day = 5 cycle
 
     public void mainSimulation(int countDay, Island island) {
-        while (day == countDay) {
+        while (day != countDay) {
             for (Сell[] cells : island.getСells()) {
                 for (Сell currentCell : cells) {
+                    new MoveSimulation().moveIterator(island, currentCell, currentCell.getResidentList());
                     for (int i = 0; i < currentCell.getResidentList().size(); i++) {
                         if (currentCell.getResidentList().get(i) instanceof Grass grass) {
                             grass.setPlusGrowGrass(1);
                         }
                     }
-//                    currentCell.setResidentList(new EatSimulation().eatIterator(currentCell.getResidentList()));
-//                    currentCell.setResidentList(new MultiplySimulation().multiplyIterator(currentCell.getResidentList()));
-                    new MoveSimulation().moveIterator(island, currentCell, currentCell.getResidentList());
+                }
+            }
+            printStatistic(island, day);
+            for (Сell[] cells : island.getСells()) {
+                for (Сell currentCell : cells) {
+                    currentCell.setResidentList(new MultiplySimulation().multiplyIterator(currentCell.getResidentList()));
+                }
+            }
+            printStatistic(island, day);
+            for (Сell[] cells : island.getСells()) {
+                for (Сell currentCell : cells) {
+                    currentCell.setResidentList(new EatSimulation().eatIterator(currentCell.getResidentList()));
                 }
             }
             printStatistic(island, day);
@@ -47,26 +57,6 @@ public class Simulation {
         printAnimalСounting(island);
         System.out.println("+".repeat(100));
     }
-
-//    public static void printIsland(Island island) {
-//        for (Сell[] cells : island.getСells()) {
-//            for (Сell cell : cells) {
-//                for (Resident resident : cell.getResidentList()) {
-//                    System.out.println("Coordinate  X: " + cell.getCoordinate().getCoordinateX()
-//                            + " Coordinate Y : " + cell.getCoordinate().getCoordinateY());
-//                    System.out.print(resident.getName() + " ");
-//                    System.out.print(resident.getIcon() + " ");
-//                    System.out.print(resident.getWeight() + " ");
-//                    System.out.print(resident.getMaxQuantityPerCell() + " ");
-//                    System.out.print(resident.getFoodRequiredForSatiation() + " ");
-//                    System.out.print(resident.getMovementSpeed() + " ");
-//                    System.out.print(resident.getMovementSpeed() + " ");
-//                    System.out.println(resident.getEatingRiskMap() + " ");
-//                }
-//                System.out.println("-".repeat(15));
-//            }
-//        }
-//    }
 
     public void printAnimalСounting(Island island) {
         int animalCount = 0;

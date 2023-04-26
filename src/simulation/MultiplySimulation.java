@@ -10,35 +10,38 @@ import objects.inhabitans.animals.omnivores.Mouse;
 import objects.inhabitans.animals.predators.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import static constants.path.JsonPath.*;
 
 
 public class MultiplySimulation {
-
-    public List<Resident> multiplyIterator(List<Resident> residentList){
-        int size = residentList.size();
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
-                if(i == j){continue;}
+    public List<Resident> multiplyIterator(List<Resident> residentList) {
+        ArrayList<Resident> children = new ArrayList<>();
+        for (int i = 0; i < residentList.size(); i++) {
+            for (int j = 0; j < residentList.size(); j++) {
+                if (i == j) {
+                    continue;
+                }
                 Animal animal = animalBirth(residentList.get(i), residentList.get(j));
-                if(animal != null){
-                    residentList.add((Resident) animal);
+                if (animal != null) {
+                    children.add((Resident) animal);
                 }
             }
         }
+        residentList.addAll(children);
         return residentList;
     }
 
     public static Animal animalBirth(Resident residentFather, Resident residentMother) {
         if (residentFather instanceof Animal animal && residentMother instanceof Animal animal1 && animal1.isPair(animal)) {
-                    return inputResidentOutAnimal(residentFather);
+            return inputResidentOutAnimal(residentFather);
         }
         return null;
     }
 
-    private static Animal inputResidentOutAnimal(Resident resident){
+    private static Animal inputResidentOutAnimal(Resident resident) {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             if (resident instanceof Buffalo) {

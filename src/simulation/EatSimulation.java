@@ -32,9 +32,11 @@ public class EatSimulation {
     private void addToRemove(Resident eater, Resident food, int i) {
         if (eater instanceof Animal animal && animal.isDeadly(food)) {
             animal.setEnergy(food.getWeight());
-            this.animalsToRemove.add(i);
             if (food instanceof Grass grass && grass.getWeight() == 5) {
                 grass.setGrowGrass(0);
+            }
+            if(!(food instanceof Grass)){
+                this.animalsToRemove.add(i);
             }
         } else if (eater instanceof Covid covid) {
             if (covid.isDeadly(food)) {

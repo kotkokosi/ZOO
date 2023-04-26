@@ -54,9 +54,6 @@ public abstract class Animal extends Entity {
             this.energy += energy;
         }
     }
-    public boolean checkFullEnergy() {
-        return energy > foodRequiredForSatiation;
-    }
 
     public Animal(String name, String icon, double weight,
                   int maxQuantityPerCell, int movementSpeed, double foodRequiredForSatiation, double energy, Map<String, Integer> eatingRiskMap) {
@@ -71,13 +68,9 @@ public abstract class Animal extends Entity {
 
 
     public boolean isPair(Animal animal) {
-        if(this instanceof Predator){
+        if(animal.getName().equals(this.getName())){
             int love = RandomRangeInt.getNumber(0, 101);
-            return love < 5;
-        }
-        if(this instanceof Animal){
-            int love = RandomRangeInt.getNumber(0, 101);
-            return love < 60;
+            return love < 95;
         }
         return false;
     }
@@ -99,10 +92,10 @@ public abstract class Animal extends Entity {
     }
 
     public boolean minusEnergyAndCheckDead() {
-        if (this.getEnergy() <= 10) {
+        if (this.getEnergy() <= this.getFoodRequiredForSatiation() / 100) {
             return true;
         } else {
-            this.setEnergy(this.getEnergy() - 10);
+            energy = this.getEnergy() - (this.getFoodRequiredForSatiation() / 100);
             return false;
         }
     }
