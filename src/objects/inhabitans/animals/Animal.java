@@ -75,17 +75,6 @@ public abstract class Animal extends Entity {
         return false;
     }
 
-    public Coordinate selectDirection(Сell currentCell) {
-        Random random = new Random();
-        int randomX = random.nextInt((this.movementSpeed * -1), this.movementSpeed + 1);
-        int randomY = random.nextInt((this.movementSpeed * -1), this.movementSpeed + 1);
-
-        int supposedMoveX = (randomX) + currentCell.getCoordinate().getCoordinateX();
-        int supposedMoveY = (randomY) + currentCell.getCoordinate().getCoordinateY();
-
-        return new Coordinate(supposedMoveX, supposedMoveY);
-    }
-
     public boolean isDeadly(Resident food) {
         int chanceOfDeath = this.getEatingRiskMap().get(food.getName());
         return RandomRangeInt.getNumber(1,101) <= chanceOfDeath;

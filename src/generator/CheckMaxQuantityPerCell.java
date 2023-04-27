@@ -11,7 +11,7 @@ import objects.inhabitans.animals.omnivores.Duck;
 import objects.inhabitans.animals.omnivores.Mouse;
 import objects.inhabitans.animals.predators.*;
 import objects.inhabitans.plants.Grass;
-import objects.inhabitans.virus.Covid;
+import objects.inhabitans.virus.Virus1;
 import objects.inhabitans.virus.Virus;
 
 @Getter
@@ -189,7 +189,7 @@ public class CheckMaxQuantityPerCell {
             wolfQuantityPerCell--;
         } else if (resident instanceof Grass) {
             grassQuantityPerCell--;
-        } else if (resident instanceof Covid) {
+        } else if (resident instanceof Virus1) {
             covidQuantityPerCell--;
         }
     }

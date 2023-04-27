@@ -8,7 +8,7 @@ import objects.inhabitans.animals.omnivores.Duck;
 import objects.inhabitans.animals.omnivores.Mouse;
 import objects.inhabitans.animals.predators.*;
 import objects.inhabitans.plants.Grass;
-import objects.inhabitans.virus.Covid;
+import objects.inhabitans.virus.Virus1;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ public class GeneratorListEntity {
     public List<Resident> generateListEntity(CheckMaxQuantityPerCell check) {
         ObjectMapper objectMapper = new ObjectMapper();
         List<Resident> residents = new ArrayList<>();
-        int boundResident = new Random().nextInt(1, 100);
+        int boundResident = new Random().nextInt(0, 70);
         for (int i = 0; i < boundResident; i++) {// bound do limit Entity on Cell
             boolean turn = true;
             while (turn) {
@@ -63,7 +63,7 @@ public class GeneratorListEntity {
             entities.add(14, objectMapper.readValue(pathWolf, Wolf.class));
 
             if (RandomRangeInt.getNumber(0, 101) < 11) {
-                entities.add(15, objectMapper.readValue(pathCovid, Covid.class));
+                entities.add(15, objectMapper.readValue(pathCovid, Virus1.class));
             }
         } catch (IOException e) {
             throw new RuntimeException(e);

@@ -1,6 +1,5 @@
-import interfaces.generalEntity.Resident;
+
 import objects.island.Island;
-import objects.island.Сell;
 import simulation.Simulation;
 
 import java.util.Scanner;

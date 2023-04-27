@@ -5,12 +5,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import interfaces.generalEntity.Resident;
 import java.util.Map;
 
-public class Covid extends Virus implements Resident {
+public class Virus1 extends Virus implements Resident {
     @JsonCreator
-    public Covid(@JsonProperty("name") String name,
-                 @JsonProperty("icon") String icon,
-                 @JsonProperty("maxQuantityPerCell") int maxQuantityPerCell,
-                 @JsonProperty("eatingRiskMap") Map<String, Integer> eatingRiskMap) {
+    public Virus1(@JsonProperty("name") String name,
+                  @JsonProperty("icon") String icon,
+                  @JsonProperty("maxQuantityPerCell") int maxQuantityPerCell,
+                  @JsonProperty("eatingRiskMap") Map<String, Integer> eatingRiskMap) {
         super(name, icon, maxQuantityPerCell, eatingRiskMap);
     }
 

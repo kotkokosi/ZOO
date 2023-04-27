@@ -1,5 +1,7 @@
 package simulation;
 
+import handlers.EatHandler;
+import handlers.PairHandler;
 import interfaces.generalEntity.Resident;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,22 +11,71 @@ import objects.inhabitans.animals.omnivores.Duck;
 import objects.inhabitans.animals.omnivores.Mouse;
 import objects.inhabitans.animals.predators.*;
 import objects.inhabitans.plants.Grass;
-import objects.inhabitans.virus.Covid;
+import objects.inhabitans.virus.Virus1;
 import objects.island.Island;
 import objects.island.Сell;
+
+import java.util.ArrayList;
 
 
 @Getter
 @Setter
 public class Simulation {
 
-    private static int day = 1; // 1 day = 5 cycle
+    private static int day = 0;
 
     public void mainSimulation(int countDay, Island island) {
         while (day != countDay) {
             for (Сell[] cells : island.getСells()) {
                 for (Сell currentCell : cells) {
-                    new MoveSimulation().moveIterator(island, currentCell, currentCell.getResidentList());
+                    ArrayList<Resident> residents = (ArrayList<Resident>) currentCell.getResidentList();
+                    currentCell.setResidentList(new ArrayList<>());
+                    for (Resident resident : residents) {
+                        resident.move(island, currentCell);
+                    }
+                }
+            }
+
+            for (Сell[] cells : island.getСells()) {
+                for (Сell currentCell : cells) {
+                    ArrayList<Resident> residents = (ArrayList<Resident>) currentCell.getResidentList();
+                    for (int j = 0; j < residents.size(); j++) {
+                        for (int i = 0; i < residents.size(); i++) {
+                            if (j == i) {
+                                continue;
+                            }
+                            if(!residents.get(j).multiply(residents.get(i))){
+                                i = residents.size();
+                            }
+                        }
+                    }
+                    residents.addAll(PairHandler.children);
+                    currentCell.setResidentList(residents);
+                }
+            }
+
+            for (Сell[] cells : island.getСells()) {
+                for (Сell currentCell : cells) {
+                    for (int j = 0; j < currentCell.getResidentList().size(); j++) {
+                        for (int i = 0; i < currentCell.getResidentList().size(); i++) {
+                            if (j == i) {
+                                continue;
+                            }
+                            if (currentCell.getResidentList().get(i) instanceof Grass grass) {
+                                if (grass.getGrowGrass() == 5) {
+                                    grass.setGrowGrass(0);
+                                }
+                                continue;
+                            }
+                            currentCell.getResidentList().get(j).eat(currentCell.getResidentList().get(i));
+                        }
+                    }
+                    currentCell.setResidentList(EatHandler.animalsDeath(currentCell.getResidentList(), EatHandler.animalsToRemove));
+                }
+            }
+
+            for (Сell[] cells : island.getСells()) {
+                for (Сell currentCell : cells) {
                     for (int i = 0; i < currentCell.getResidentList().size(); i++) {
                         if (currentCell.getResidentList().get(i) instanceof Grass grass) {
                             grass.setPlusGrowGrass(1);
@@ -32,24 +83,31 @@ public class Simulation {
                     }
                 }
             }
-            printStatistic(island, day);
-            for (Сell[] cells : island.getСells()) {
-                for (Сell currentCell : cells) {
-                    currentCell.setResidentList(new MultiplySimulation().multiplyIterator(currentCell.getResidentList()));
-                }
-            }
-            printStatistic(island, day);
-            for (Сell[] cells : island.getСells()) {
-                for (Сell currentCell : cells) {
-                    currentCell.setResidentList(new EatSimulation().eatIterator(currentCell.getResidentList()));
-                }
-            }
+
             printStatistic(island, day);
             EnergyMinusSimulation.energyMinus(island);
             day++;
         }
 
     }
+
+//    public static void printIsland(Island island) {
+//        for (Сell[] cells : island.getСells()) {
+//            for (Сell cell : cells) {
+//                for (Resident resident : cell.getResidentList()) {
+//                    System.out.print(resident.getName() + " ");
+//                    System.out.print(resident.getIcon() + " ");
+//                    System.out.print(resident.getWeight() + " ");
+//                    System.out.print(resident.getMaxQuantityPerCell() + " ");
+//                    System.out.print(resident.getMovementSpeed() + " ");
+//                    System.out.print(resident.getFoodRequiredForSatiation() + " ");
+//                    System.out.print(resident.getMovementSpeed() + " ");
+//                    System.out.println(resident.getEatingRiskMap() + " ");
+//                }
+//                System.out.println("#".repeat(100));
+//            }
+//        }
+//    }
 
     public void printStatistic(Island island, int day) {
 
@@ -116,10 +174,10 @@ public class Simulation {
                         herbivoresCount++;
                         animalCount++;
                     } else if (resident instanceof Goat) {
-                        goatCount++;
-                        herbivoresCount++;
                         animalCount++;
                     } else if (resident instanceof Horse) {
+                        goatCount++;
+                        herbivoresCount++;
                         horseCount++;
                         herbivoresCount++;
                         animalCount++;
@@ -163,7 +221,7 @@ public class Simulation {
                         wolfCount++;
                         predatorsCount++;
                         animalCount++;
-                    } else if (resident instanceof Covid) {
+                    } else if (resident instanceof Virus1) {
                         covidCount++;
                         predatorsCount++;
                         virusCount++;

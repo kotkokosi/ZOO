@@ -42,7 +42,7 @@ public class Сell {
         residentList.add(animalNumber, resident);
     }
 
-    public Resident removeResidentToList(int animalNumber){
-            return residentList.remove(animalNumber);
-    }
+//    public Resident removeResidentToList(int animalNumber){
+//            return residentList.remove(animalNumber);
+//    }
 }
